@@ -1,9 +1,11 @@
 <script setup lang="ts">
 
+import NavBar from "@/components/nav-bar.vue";
 </script>
 
 <template>
-  <h1 class="text-4xl">the kave shop</h1>
+  <NavBar />
+  <router-view />
 </template>
 
 <style scoped>
