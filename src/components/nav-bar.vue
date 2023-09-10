@@ -1,5 +1,5 @@
 <template>
-  <nav class="w-full flex sm:items-center justify-between px-6 pt-4">
+  <nav class="w-full flex sm:items-center justify-between px-6 pt-4 mb-12">
     <h2 class="text-4xl">
       <router-link :to="{ name: 'home'}">the kave shop</router-link>
     </h2>
