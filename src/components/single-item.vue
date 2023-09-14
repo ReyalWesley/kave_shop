@@ -1,15 +1,22 @@
 <script setup lang="ts">
 import type {ProductType} from "@/data/product";
 
-const props = defineProps<{
+defineProps<{
   product: ProductType;
 }>();
+
 </script>
 <template>
-<div class="item bg-red-50 border-3 border-red-800">
-  <div class="border-3 border-red-50 bg-white relative left-2 -top-2 hover:left-0 hover:top-0 transition-transform duration-300">
-    <img :src="product.image" alt="" class="w-full h-full object-cover">
+<div class="flex flex-col items-center gap-y-2">
+  <div class="item bg-blue-200">
+    <div class="bg-white relative hover:left-2 hover:-top-2 left-0 top-0 transition-transform duration-300">
+      <img :src="product.image" :alt="product.name" class="w-full h-full object-cover">
+    </div>
   </div>
+  <p class="text-center">
+    {{ product.name }} <br>
+    {{ product.price }}€
+  </p>
 </div>
 </template>
 <style>

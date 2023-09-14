@@ -12,7 +12,7 @@ import Couch4 from "@/assets/images/couch4.jpg";
 import Table from "@/assets/images/table.jpg";
 import Convenient from "@/assets/images/convenient.jpg";
 
-type CategoriesType =
+export type CategoriesType =
     | "Chairs"
     | "Leather"
     | "Plastic"
