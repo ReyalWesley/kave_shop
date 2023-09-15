@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {ProductType} from "@/data/product";
+import type { ProductType } from "@/data/product";
 
 defineProps<{
   product: ProductType;
@@ -21,7 +21,7 @@ defineProps<{
 </template>
 <style>
   .item, .parent div {
-    height: 350px;
+    height: 600px;
     width: 100%;
   }
 </style>

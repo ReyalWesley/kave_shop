@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import SingleItem from "@/components/single-item.vue";
-import {CategoriesType, products} from "@/data/product";
-import {Ref, ref} from "vue";
+import { products } from "@/data/product";
+import type { CategoriesType } from "@/data/product";
+import { computed, ref } from "vue";
 
+const selectedCategories = ref<Array<CategoriesType>>([]);
+
+const allProducts = ref(products);
 const categories: CategoriesType[] = [
   "Chairs",
   "Leather",
@@ -16,47 +20,27 @@ const categories: CategoriesType[] = [
   "Tables"
 ];
 
-const allProducts = ref(products);
-
-const filteredProducts = ref(allProducts.value);
-
-const selectedCategories: Ref<{ [k in CategoriesType]: boolean }> = ref(
-    Object.fromEntries(categories.map((category) => [category, false]))
-) as Ref<{ [k in CategoriesType]: boolean }>;
-
-const refreshFilter = (category: CategoriesType) => {
-  selectedCategories.value[category] = !selectedCategories.value[category];
-  filteredProducts.value = filterProducts();
-  console.log(selectedCategories.value)
+const resetFilter = () => {
+  selectedCategories.value = [];
 };
 
-function filterProducts() {
+const filteredProducts = computed(() => {
   return allProducts.value.filter((product) => {
     return categories.every((category) => {
-      return selectedCategories.value[category] ? product.category.includes(category) : true;
+      return selectedCategories.value.includes(category) ? product.category.includes(category) : true;
     });
   });
-}
-
-const resetFilter = () => {
-  const keys = Object.keys(selectedCategories.value);
-  keys.map((key: string) => {
-    selectedCategories.value[key] = false;
-  });
-  filteredProducts.value = filterProducts();
-
-  console.log(selectedCategories.value)
-};
+});
 
 </script>
 <template>
   <form class="flex m-auto gap-x-4 mb-6 w-5/6 justify-center flex-wrap">
-    <label v-for="(category) in categories" :key="category" class="flex items-center gap-x-2">
+    <label v-for="(category, index) in categories" :key="index" class="flex items-center gap-x-2">
       {{ category }}
-      <input type="checkbox" @change="refreshFilter(category)" :checked="selectedCategories[category]">
+      <input type="checkbox" v-model="selectedCategories" :value="category">
     </label>
     <label>
-      <button @click="resetFilter()">reset filter</button>
+      <button @click="resetFilter">reset filter</button>
     </label>
   </form>
 
